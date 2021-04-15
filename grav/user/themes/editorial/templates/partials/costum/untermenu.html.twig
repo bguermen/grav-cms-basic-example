@@ -1,0 +1,42 @@
+<!-- howto -->
+<!-- Howto Main Page-->
+{% if page.taxonomy.tag[0] is same as('howto') %}
+<ul class="untermenulist">
+    {% for page in taxonomy.findTaxonomy({'category':'howto'}) %}
+    <li class="untermenu_li">
+        <a class="untermenu_a" href=".{{page.route}}">{{page.title}}</a> </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!-- Howto Sub Page-->
+{% if page.taxonomy.category[0] is same as('howto') %}
+<h4>Other How to's: </h4>
+<ul class="untermenulist">
+    {% for page in taxonomy.findTaxonomy({'category':'howto'}) %}
+    <li class="untermenu_li">
+        <a class="untermenu_a" href="./{{page.slug}}">{{page.title}}</a> </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<!-- teams -->
+<!-- Teams Main Page-->
+{% if page.taxonomy.tag[0] is same as('teams')  %}
+<ul class="untermenulist">
+    {% for page in taxonomy.findTaxonomy({'category':'teams'}) %}
+    <li class="untermenu_li">
+        <a class="untermenu_a" href=".{{page.route}}">{{page.title}}</a> </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!-- Teams Sub Page-->
+{% if page.taxonomy.category[0] is same as('teams')  %}
+<h4>Other Teams: </h4>
+<ul class="untermenulist">
+    {% for page in taxonomy.findTaxonomy({'category':'teams'}) %}
+    <li class="untermenu_li">
+        <a class="untermenu_a" href="./{{page.slug}}">{{page.title}}</a> </li>
+    {% endfor %}
+</ul>
+{% endif %}

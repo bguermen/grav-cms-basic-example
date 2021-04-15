@@ -1,0 +1,25 @@
+{% if theme_config['sidebarEnabled'] == 'inactive' %}
+<div id="sidebar" class="inactive">
+{% else %}
+<div id="sidebar">
+{% endif %}
+
+    <div class="inner">
+
+
+        <!-- Menu -->
+        <nav id="menu">
+            <div id="logoutdiv"> <a id="logout" href="/logout"> </a> </div>
+            <header class="major">
+                <h2>Menu</h2>
+            </header>
+            {% include 'partials/navigation.html.twig' %}
+        </nav>
+
+        <!-- Footer-->
+        <footer id="footer">
+            <p>Developed by Bircan Gürmen</p>
+        </footer> 
+
+    </div>
+</div>

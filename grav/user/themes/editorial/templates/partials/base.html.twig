@@ -1,0 +1,122 @@
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+<!DOCTYPE html>
+<html lang="{{ grav.language.getActive ?: config.site.default_lang }}">
+
+<head>
+    {% block head %}
+    <meta charset="utf-8" />
+    <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% include 'partials/metadata.html.twig' %}
+    <link rel="icon" type="image/png" href="{{ url('theme://images/logo.png') }}" />
+    <link rel="canonical" href="{{ page.url(true, true) }}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    {% block stylesheets %}
+    {% do assets.addCss('https://unpkg.com/purecss@1.0.0/build/pure-min.css', 100) %}
+    {% do assets.addCss('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', 99) %}
+    {% do assets.addCss('theme://css/main.css', 97) %}
+    {% do assets.addCss('theme://css/custom.css', 97) %}
+    {% endblock %}
+    {{ assets.css() }}
+
+    {% block javascripts %}
+    {% do assets.addJs('jquery', 100) %}
+    {% do assets.addJs('theme://js/skel.min.js', 99) %}
+    {% do assets.addJs('theme://js/util.js', 98) %}
+    {% do assets.addJs('theme://js/main.js', {'priority':97, 'group':'bottom'}) %}
+    {% endblock %}
+    {{ assets.js() }}
+
+    {% endblock head%}
+</head>
+
+<body id="top" class="{{ page.header.body_classes }}">
+
+    <div id="wrapper">
+        <div id="main">
+            <div class="inner">
+                {% block header %}
+                <header id="header">
+                    <a class="logo" href="{{ base_url == '' ? '/' : base_url }}">
+                        <img src="/user/images/integr8-header-logo-dark-01.svg" style="width:200px"> <!-- <strong>{{ config.site.title }}</strong> -->{{theme_config.themeSlogan}}</a>
+                    {% include 'partials/socialIcons.html.twig' %}
+                </header><!-- End #header -->
+                {% endblock %}
+                {% block body %}
+                <section>
+                    <header class="main">
+                        <h1>
+                            {% if page.taxonomy.category[0] is same as('howto') or page.taxonomy.category[0] is same as('teams') %}
+                            <!-- if page.tax.categ howto_main oder teams_main, dann Pfeil davor mit verlinkung (aus untermenu.hmtl) -->
+                            <a href="." class="text-deco"><i class="fas fa-arrow-left"></i></a>
+                            {% endif %}
+                            {% if page.taxonomy.category[0] is same as('howto') 
+                                or page.taxonomy.category[0] is same as('teams') %}
+                            {{ page.parent.title }}
+                            {% else %}
+                            {{ page.title }}
+                            {% endif %}
+
+
+
+                        </h1>
+
+                        {% if page.taxonomy.category[0] is same as('teams') %}
+                        <h2> {{ page.title }} </h2>
+                        {% endif %}
+
+                    </header> <!-- Content-Überschrift -->
+                    {% if page.header.primaryImage %}
+                    {% set primaryImage = ((page.header.primaryImage)|first) %}
+
+                    <span class="image main">{{ page.media[primaryImage.name].html() }}</span>
+                    {% endif %}
+                    {% block content %}{% endblock %}
+                    <!-- Body mit Content befüllen -->
+
+                    {% block untermenu %}
+                    {% if page.taxonomy.category[0] is same as('howto') 
+                       or page.taxonomy.category[0] is same as('teams') 
+                       or page.taxonomy.category[0] is same as('teams_main') 
+                       or page.taxonomy.category[0] is same as('howto_main') %}
+                    {% include 'partials/costum/untermenu.html.twig' %}
+                    {% endif %}
+                    {% endblock %}
+
+                    {# block prevnextbutton #}
+                    {# include 'partials/costum/prevnext.html.twig' #}
+                    {# endblock #}
+
+                </section><!-- End section -->
+                {% endblock %}
+
+            </div> <!-- End .inner -->
+        </div><!-- End #main -->
+
+        <!-- Sidebar/menu etc -->
+        {% block sidebar %}
+        {%  include 'partials/sidebar.html.twig' %}
+        {% endblock %}
+
+        {# block mobnav #}
+        {# include 'partials/mobilenav.html.twig' #}
+        {# endblock #}
+
+    </div>
+    <!--End #wrapper -->
+    {% block bottom %}
+    {{ assets.js('bottom') }}
+    {% endblock %}
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/user/themes/editorial/js/mytheme/modernizr.custom.js"></script>
+    <script src="/user/themes/editorial/js/mytheme/jquery.dlmenu.js"></script>
+    <script src="/user/themes/editorial/js/mytheme/pagetransitions.js"></script>
+    <!--    <script src="/user/themes/editorial/js/mytheme/costum.js"></script>-->
+
+</body>
+
+</html>

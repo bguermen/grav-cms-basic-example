@@ -1,0 +1,98 @@
+
+/*# sourceMappingURL=custom.css.map */
+
+/*
+#logout{
+    position:absolute;
+    right:0;
+    top:0;
+}
+*/
+
+
+
+#logout a{
+    border-bottom:0 !important;
+    z-index: 10001;
+}
+
+
+
+#logoutdiv {
+    text-decoration: none;
+    -moz-transition: left 0.5s ease;
+    -webkit-transition: left 0.5s ease;
+    -ms-transition: left 0.5s ease;
+    transition: left 0.5s ease;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    border: 0;
+    display: block;
+    height: 3em;
+    line-height: 2.5em;
+    outline: 0;
+    overflow: hidden;
+    position: absolute;
+    text-align: right;
+    text-indent: 7.5em;
+    top: 1.66667em;
+    right: 1.66667em;
+    width: 2.1em;
+    z-index: 10000
+}
+
+#logout:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none !important
+}
+
+#logout:before {
+    content: '\f08b'; /*f011*/
+    color:white;
+    font-size: 1.5rem;
+    height: inherit;
+    right: 0;
+    line-height: inherit;
+    position: absolute;
+    text-indent: 0;
+    top: 0;
+    width: inherit
+}
+
+/* mobile Nav, left/right tap */
+.mobnav{
+/*    background-color:grey;*/
+    position: absolute;
+    width:5%;
+    height:85%;
+    top:13%;
+    z-index: 20000;
+}
+#mobnav_left{
+    left:0;
+}
+#mobnav_right{
+    right:0;
+}
+
+/*
+.button{
+    width: 100px;
+    height: 50px;
+    background-color: aquamarine;
+}
+*/
+/* active list element */
+.active{ 
+    color: #90fbbc !important;
+}
+.text-deco, .untermenulist a{
+    border-bottom: 0 !important;
+}
+
+img{
+    max-width:500px;
+}

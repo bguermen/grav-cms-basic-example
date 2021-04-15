@@ -1,0 +1,50 @@
+
+{% macro nav_loop(page) %}
+
+    <!--
+    NEXT BUTTON 
+   
+        set variable für temp speicher
+        index = -1 damit bei 0 anfängt im ersten durchlauf
+--> 
+<!-- test index um 1 erhöhen
+--> 
+    
+    {% for p in page.children.visible %}
+        
+<!--        zähle index hoch +1 -->
+        
+        {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
+<!--        href entsprechend oberer funktion setzen? wenn p.active, dann nimm nächstes index -->
+        
+<!--        -->
+        
+        
+        {% if p.children.visible.count > 0 %}
+            <li>
+                {% if grav.theme.config['dropdown']['enabled'] %}
+                  <a href="{{ p.url }}" class="opener jumpToPage {{ active_page }} {{ loop.index }} "> 
+                {% else %}
+                  <a href="{{ p.url }}" class="jumpToPage {{ active_page }} {{ loop.index }}"> <!-- setze index als Klasse -->
+                {% endif %}
+                {{ p.menu }}
+                </a>
+                <ul>
+                    {{ _self.nav_loop(p) }}
+                </ul>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ p.url }}" class="jumpToPage {{ active_page }} {{ loop.index }}">
+                    {{ p.menu }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+<!--            setze href vom Button entsprechend der aktuellen seite (active) indexklasse+1, bspw: href="/ {slug von xx. p mit der klasse 12 ?}" -->
+            
+<ul {{ tree ? 'class="tree"' : '' }}>
+    {{ _self.nav_loop(pages) }}
+</ul>
